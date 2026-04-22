@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Maintain legacy font aliases for component transparency */
+  --font-headline: var(--font-display);
+  --font-body: var(--font-sans);
+
+  /* Mapped Variables to root/class level themes */
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-surface: var(--brand-surface);
+  --color-brand-border: var(--brand-border);
+  
+  --color-pastel-blue: var(--pastel-blue);
+  --color-pastel-indigo: var(--pastel-indigo);
+  --color-pastel-teal: var(--pastel-teal);
+  --color-pastel-rose: var(--pastel-rose);
+  --color-pastel-amber: var(--pastel-amber);
+  
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  /* Legacy Variable Bridges - mapping to the new Dark Pastel Aesthetic */
+  /* This ensures the existing components (which the user asked not to change) adopt the new look */
+  
+  --color-primary-base: #1a365d;
+  --color-primary-dark: var(--pastel-indigo);
+  
+  --color-secondary-base: #0061a5;
+  --color-secondary-dark: var(--pastel-teal);
+
+  --color-surface-base: var(--brand-bg);
+  --color-surface-dark: var(--brand-surface);
+  
+  --color-surface-container: var(--brand-surface);
+  --color-surface-container-dark: var(--brand-border);
+  
+  --color-on-surface: var(--text-primary);
+  --color-on-surface-dark: var(--text-primary);
+
+  --color-on-surface-variant: var(--text-secondary);
+  --color-outline-variant: var(--brand-border);
+
+  /* Global Shadow Enforcements */
+  --shadow-editorial: var(--shadow-ed);
+  --shadow-editorial-dark: var(--shadow-ed-dark);
+}
+
+/* 
+ * Light Theme (Anti-Glare / Pastel Muted) 
+ * Never use white (#fff or #f8fafc) to protect the eyes from bright light.
+ * The background uses the pastel hues from brand.png.
+ */
+:root, .light {
+  --brand-bg: #ced0e4; /* Soft dusty pastel blue-lavender */
+  --brand-surface: #dadceb; /* Slightly lighter surface, not white */
+  --brand-border: #b1b5d1; /* Subtle pastel border */
+  
+  --pastel-blue: #2563eb; 
+  --pastel-indigo: #4338ca; 
+  --pastel-teal: #0f766e;
+  --pastel-rose: #be123c;
+  --pastel-amber: #b45309;
+  
+  --text-primary: #121321;
+  --text-secondary: #3b3e60;
+  --text-muted: #5f6385;
+
+  --shadow-ed: 0 20px 40px rgba(67, 56, 202, 0.15);
+  --shadow-ed-dark: 0 25px 50px rgba(67, 56, 202, 0.2);
+}
+
+/* Dark Theme */
+.dark {
+  --brand-bg: #121418;
+  --brand-surface: #1c1f26;
+  --brand-border: #2d323d;
+  
+  --pastel-blue: #94a3b8;
+  --pastel-indigo: #a5b4fc;
+  --pastel-teal: #99f6e4;
+  --pastel-rose: #fecaca;
+  --pastel-amber: #fde68a;
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --shadow-ed: 0 20px 40px rgba(0, 0, 0, 0.4);
+  --shadow-ed-dark: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-text-primary font-sans antialiased selection:bg-pastel-indigo/30 selection:text-pastel-indigo transition-colors duration-300;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-pastel-indigo;
+    text-shadow: 0 0 12px rgba(165, 180, 252, 0.2);
+  }
+}
+
+@layer utilities {
+  .text-glow-indigo {
+    text-shadow: 0 0 12px rgba(165, 180, 252, 0.2);
+  }
+
+  .glass {
+    @apply bg-brand-surface/60 backdrop-blur-md border border-brand-border;
+  }
+  
+  .dark-pastel-gradient {
+    background: linear-gradient(135deg, var(--brand-bg) 0%, var(--brand-surface) 100%);
+  }
+
+  .editorial-header {
+    letter-spacing: -0.04em;
+    @apply font-black;
+  }
+
+  .editorial-shadow {
+    box-shadow: var(--shadow-editorial);
+  }
+
+  .dark .editorial-shadow {
+    box-shadow: var(--shadow-editorial-dark);
+  }
+}
